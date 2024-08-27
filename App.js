@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import SimpleCalculator from './src/components/simplecalculator';
+import HistoryScreen from './src/components/history';
+import ScientificCalculator from './src/components/scientific';
+import ExchangeRate from './src/components/exchangerate';
+import { enableScreens } from 'react-native-screens';
+import Calories from './src/components/test';
 
-export default function App() {
+enableScreens();
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SimpleCalculator" screenOptions={{ headerShown: false,cardStyle: { backgroundColor: '#1A1A1A' } }}>
+        <Stack.Screen name="SimpleCalculator" component={SimpleCalculator} />
+        <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
+        <Stack.Screen name="ScientificCalculator" component={ScientificCalculator} />
+        <Stack.Screen name="ExchangeRate" component={ExchangeRate} />
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <Calories/>
+    // <ScientificCalculator/>
+  );
+};
+
+export default App;
